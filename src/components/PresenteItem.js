@@ -92,7 +92,7 @@ function PresenteItem(props) {
 >
   <Fade in={open}>
     <div className={classes.paper}>
-    <FormPresent presente={props.presente} marcado={props.marcado} />
+    <FormPresent presente={props.presente} marcado={props.marcado} idPresente={props.idPresente} />
     </div>
   </Fade>
 </Modal>

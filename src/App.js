@@ -1,4 +1,10 @@
 import React from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 import './App.css';
 import Container from '@material-ui/core/Container';
 
@@ -10,6 +16,23 @@ import ConfirmaPresenca from './components/ConfirmaPresenca'
 import MensagemParaOsNoivos from './components/MensagemParaOsNoivos'
 
 function App() {
+return(
+<Router>
+  <Switch>
+    <Route path="/" exact>
+      <Home />
+    </Route>
+    <Route path="/admin">
+      <Admin />
+    </Route>
+    <Route path="/*">
+      <Erro />
+    </Route>
+  </Switch>
+</Router>
+)
+
+function Home(){
   return (
     <Container maxWidth="sm" >
     <Foto />
@@ -18,6 +41,19 @@ function App() {
     <ListaPresentes />
     </Container>
   );
+}
+
+function Admin(){
+  return (
+    <h1>Admin</h1>
+  )
+}
+
+function Erro(){
+  return (
+    <h1>Erro</h1>
+  )
+}
 }
 
 export default App;

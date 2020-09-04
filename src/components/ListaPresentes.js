@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -28,19 +28,27 @@ const useStyles = makeStyles((theme) =>({
 }));
 
 function ListaPresentes() {
+  const [listaPresente, setListaPresente] = useState([])
   const classes = useStyles();
+
+  useEffect(()=>{
+    async function buscaPresentes(){
+      await fetch("http://api.digiagenda.com.br/cinthia/lista")
+      .then(function(response) {
+        return response.json()
+      }).then(function(resp){
+        setListaPresente(resp)
+      })
+    } buscaPresentes()
+  })
+
   return (
     <div className={classes.box}>
       <Typography variant="h2" align="center" className={classes.root} >
         Lista de Presentes
     </Typography>
       <Grid container spacing={1}>
-      <PresenteItem presente="Presente 1" marcado={false} />
-      <PresenteItem presente="Presente 2" marcado={true} />
-      <PresenteItem presente="Presente 3" marcado={true} />
-      <PresenteItem presente="Presente 4" marcado={false} />
-      <PresenteItem presente="Presente 5" marcado={true} />
-      <PresenteItem presente="Presente 6" marcado={false} />
+      {listaPresente.map(item => <PresenteItem key={item._id} presente={item.presente} marcado={item.marcado}  idPresente={item._id}/>)}
       </Grid>
     </div>
   );

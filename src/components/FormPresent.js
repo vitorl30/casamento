@@ -17,14 +17,29 @@ function FormPresent(props){
     const [nome, setNome] = React.useState("");
     const [erro, setErro] = React.useState(false);
 
-    function enviar(event){
+    console.log(props.idPresente)
+
+   async function enviar(event){
         event.preventDefault()
 
         if(!nome){
             setErro(true)
         } else{
-            console.log(`O Convidado ${nome} enviou o presente ${props.presente}`)
-        }
+            console.log(`O Convidado ${nome} enviou o presente ${props.presente} id Presente ${props.idPresente}`)
+
+            const resposta = await fetch("http://api.digiagenda.com.br/cinthia/marcapresente",{
+                method: 'PUT',
+                headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({idPresente: props.idPresente, convidado: nome})
+              }).then(()=>{
+                window.location.reload();
+              })
+
+
+            }
     }
 
 
