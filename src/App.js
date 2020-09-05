@@ -6,6 +6,7 @@ import {
   Link
 } from "react-router-dom";
 import './App.css';
+import Admin from './components/Admin'
 import Container from '@material-ui/core/Container';
 
 import Foto from './components/Foto'
@@ -41,12 +42,6 @@ function Home(){
     <ListaPresentes />
     </Container>
   );
-}
-
-function Admin(){
-  return (
-    <h1>Admin</h1>
-  )
 }
 
 function Erro(){
